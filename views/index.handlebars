@@ -1,0 +1,33 @@
+<div class="container py-5 ">
+
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title d-flex justify-content-center">URL Shortener</h5>
+          <hr>
+          <i class="fas fa-link fa-6x inline-block d-flex justify-content-center"></i>
+          <form method="POST" action="/shortenURL">
+            <div class="form-group form-row">
+              <div class="col d-flex flex-column mt-3">
+                <input type="text" name="inputURL" class="form-control" id="inputURL" placeholder="input URL here"
+                  value="{{ inputURL }}">
+                {{#if error}}
+                <small class="text-danger">
+                  <i class='fas fa-exclamation-circle ms-2 my-2'>{{error}}</i>
+                </small>
+                {{/if}}
+                {{#if inputURL}}
+                <div class="alert alert-info mt-1" role="alert">
+                  <h6>your shortenURL is:</h6>
+                  <code>https://your-project-name.herokuapp.com/{{shortenURL}}</code>
+                </div>
+                {{/if}}
+                <button type="submit" class="btn btn-outline-primary col-4 mt-1 mx-auto">Shorten</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
