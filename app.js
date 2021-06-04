@@ -6,8 +6,6 @@ const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 3000
 
 const ShortenUrl = require('./models/shortenUrl')
-const { findOne } = require('./models/shortenUrl')
-
 app.engine('handlebars',exphbs ({ defaultLayout:'main'}))
 app.set('view engine', 'handlebars')
 
@@ -24,8 +22,8 @@ app.post('/shortenURL', (req, res) => {
     let error = '請輸入網址'
     return res.render('index', {inputURL , error}  )
   } else{
-      let shortenURL =''
-      shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
+    let shortenURL = 'error'
+    shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
     return ShortenUrl.create({originalUrl:inputURL , shortenUrl:shortenURL})
     .then(() => res.render('index', {inputURL , shortenURL}))
     .catch(error => console.log(error))
