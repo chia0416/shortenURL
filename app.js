@@ -19,15 +19,34 @@ app.post('/shortenURL', (req, res) => {
   const inputURL = req.body.inputURL
 
   if(!inputURL){
-    let error = '請輸入網址'
-    return res.render('index', {inputURL , error}  )
-  } else{
-    let shortenURL = 'error'
-    shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
-    return ShortenUrl.create({originalUrl:inputURL , shortenUrl:shortenURL})
-    .then(() => res.render('index', {inputURL , shortenURL}))
-    .catch(error => console.log(error))
-  }      
+    let message = '請輸入網址'
+    return res.render('index', {inputURL , message}  )
+  }
+
+  ShortenUrl.findOne({originalUrl:inputURL})
+  .lean()
+  .then((url) => {
+    if (url){
+      console.log(url)
+      console.log(inputURL)
+      let message = 'this Url is exist'
+      return res.render('index',{inputURL, message})
+    }else {
+      console.log('creat')
+      let shortenURL = ''
+       shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
+       return ShortenUrl.create({originalUrl:inputURL , shortenUrl:shortenURL})
+       .then(() => res.render('index', {inputURL , shortenURL}))
+       .catch(error => console.log(error))      
+    }
+  })
+  .catch(error => console.log(error))
+    
+  // let shortenURL = ''
+  // shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
+  // return ShortenUrl.create({originalUrl:inputURL , shortenUrl:shortenURL})
+  // .then(() => res.render('index', {inputURL , shortenURL}))
+  // .catch(error => console.log(error))      
 })
 
 app.get('/:shortenUrl', (req, res) =>{

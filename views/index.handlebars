@@ -12,9 +12,9 @@
               <div class="col d-flex flex-column mt-3">
                 <input type="text" name="inputURL" class="form-control" id="inputURL" placeholder="input URL here"
                   value="{{ inputURL }}">
-                {{#if error}}
+                {{#if message}}
                 <small class="text-danger">
-                  <i class='fas fa-exclamation-circle ms-2 my-2'>{{error}}</i>
+                  <i class='fas fa-exclamation-circle ms-2 my-2'>{{message}}</i>
                 </small>
                 {{/if}}
                 {{#if inputURL}}
