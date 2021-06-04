@@ -2,7 +2,7 @@
 可以將任意網址轉換成一個短網址，並使用。
 
 # 專案畫面
-![image](https://github.com/chia0416/Generate_trash_words/blob/main/HomePage.jpg)
+![image](https://github.com/chia0416/shortenURL/blob/main/config/shortLink.png)
 
 # Features - 產品功能
 <ul>
