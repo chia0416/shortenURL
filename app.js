@@ -27,12 +27,10 @@ app.post('/shortenURL', (req, res) => {
   .lean()
   .then((url) => {
     if (url){
-      console.log(url)
-      console.log(inputURL)
       let message = 'this Url is exist'
-      return res.render('index',{inputURL, message})
+      console.log(url.shortenUrl)
+      return res.render('index', {inputURL, shortenURL:url.shortenUrl, message})
     }else {
-      console.log('creat')
       let shortenURL = ''
        shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
        return ShortenUrl.create({originalUrl:inputURL , shortenUrl:shortenURL})
@@ -42,11 +40,6 @@ app.post('/shortenURL', (req, res) => {
   })
   .catch(error => console.log(error))
     
-  // let shortenURL = ''
-  // shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
-  // return ShortenUrl.create({originalUrl:inputURL , shortenUrl:shortenURL})
-  // .then(() => res.render('index', {inputURL , shortenURL}))
-  // .catch(error => console.log(error))      
 })
 
 app.get('/:shortenUrl', (req, res) =>{
@@ -54,7 +47,6 @@ app.get('/:shortenUrl', (req, res) =>{
   return ShortenUrl.findOne({shortenUrl})
   .then(shortenUrl => {
     if (!shortenUrl) {
-      console.log('do not find')
       res.redirect('/')
     }
     else {
