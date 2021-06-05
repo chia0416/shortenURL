@@ -10,7 +10,7 @@
           <form method="POST" action="/shortenURL">
             <div class="form-group form-row">
               <div class="col d-flex flex-column mt-3">
-                <input type="text" name="inputURL" class="form-control" id="inputURL" placeholder="input URL here"
+                <input type="url" name="inputURL" class="form-control" id="inputURL" placeholder="input URL here"
                   value="{{ inputURL }}">
                 {{#if message}}
                 <small class="text-danger">

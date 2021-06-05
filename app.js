@@ -23,16 +23,16 @@ app.post('/shortenURL', (req, res) => {
     return res.render('index', {inputURL , message}  )
   }
 
-  ShortenUrl.findOne({originalUrl:inputURL})
+  
+  ShortenUrl.findOne({originalUrl:inputURL })
   .lean()
   .then((url) => {
     if (url){
       let message = 'this Url is exist'
-      console.log(url.shortenUrl)
       return res.render('index', {inputURL, shortenURL:url.shortenUrl, message})
     }else {
-      let shortenURL = ''
-       shortenURL = randomShortenURL(Math.floor(Math.random()*5)+5 )
+       let shortenURL = ''
+       shortenURL = randomShortenURL(5)
        return ShortenUrl.create({originalUrl:inputURL , shortenUrl:shortenURL})
        .then(() => res.render('index', {inputURL , shortenURL}))
        .catch(error => console.log(error))      
